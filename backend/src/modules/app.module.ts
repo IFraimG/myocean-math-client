@@ -14,8 +14,7 @@ dotenv.config()
     TasksModule,
     FileModule,
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@myoceanmath.w3fdq.mongodb.net/users?retryWrites=true&w=majority`, 
-      { useNewUrlParser: true, useFindAndModify: true }
+      `mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@myoceanmath.0jplqki.mongodb.net/?appName=myoceanmath`, 
     )],
 })
 export class AppModule {}

@@ -34,10 +34,14 @@ export class TasksService {
     async createToken(userID: string) {
       let tasks = await this.Tasks.find().limit(5).exec()
       let date = new Date().toLocaleDateString()
-      tasks.map(async item => {
+      for (let item of tasks) {
         item.token = userID + date
         await item.save()
-      })
+      }
+      // tasks.map(async item => {
+      //   item.token = userID + date
+      //   await item.save()
+      // })
       
       return userID + date
     }
@@ -73,7 +77,7 @@ export class TasksService {
     }
 
     async deleteTasks(taskID: string) {
-      let task = await this.Tasks.findOneAndRemove({id: taskID}).exec()
+      let task = await this.Tasks.findOneAndDelete({id: taskID}).exec()
       return task
     }
 }

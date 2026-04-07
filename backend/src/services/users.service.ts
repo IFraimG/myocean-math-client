@@ -8,30 +8,37 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel("Users") private User: Model<UserDocument>, @InjectModel("Tasks") private Tasks: Model<TaskDocument>) {}
+    constructor(
+      @InjectModel("Users") private User: Model<UserDocument>, 
+      @InjectModel("Tasks") private Tasks: Model<TaskDocument>
+    ) {}
 
-    async create(userData: any): Promise<UserDocument> {
+    async create(userData: any) {
         let data = { ...userData, id: "" }
         let isNotUser = false
         let words = "abcdefghijklmnopqrstuvwxyz";
+        let attempt = 0
         
-        while (isNotUser != true) {
+        while (isNotUser != true && attempt < 9999) {
           let id = ""
           for (let i = 0; i <= 14; i++) {
             id += words.charAt(Math.floor(Math.random() * words.length))
           }
-          let isUser = await this.User.findOne({id: id}).exec()
-          if (isUser == null) {
-            isNotUser = true
+          let isUser = await this.User.findOne({id: id}).lean().exec()
+          if (!isUser) { 
             data.id = id
+            isNotUser = true
           }
+          attempt++
         }
 
-        let user = await this.User.create(data);
-        return user
+        // let user = await this.User.create(data);
+        let user = new this.User(data)
+        const userDocument = await user.save()
+        return userDocument
     }
     
-    async findAll(): Promise<UserDocument[]> {
+    async findAll() {
         return await this.User.find().exec();
     }
 
