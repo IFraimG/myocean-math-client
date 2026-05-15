@@ -14,11 +14,13 @@ const HomePage = () => {
   const [isLoader, setLoader] = useState<boolean>(false)
 
   useEffect(() => {
+    let mounted = true
     setLoader(true)
     AuthAPI.checkauth().then(res => {
       if (res.isAuth) history.push("/profile/" + res.id)
-      setLoader(false)
+      else if (mounted) setLoader(false)
     })
+    return () => { mounted = false }
   }, [])
 
   return <>

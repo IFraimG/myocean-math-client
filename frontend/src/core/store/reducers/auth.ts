@@ -64,6 +64,7 @@ export const loginThunk = (user: UserLogin) => async (dispatch: any) => {
     localStorage.setItem("token", data.token)
 
     dispatch(setUserAction(data.user))
+    dispatch(setAuthAction(true))
     await dispatch(setModalAction(false))
     dispatch(setErrorLoginAction(""))
   }

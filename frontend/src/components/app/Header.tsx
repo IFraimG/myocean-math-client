@@ -25,21 +25,6 @@ const Header = () => {
               Myocean Math
             </Typography>
           </FRlink>
-          { !isAuth ? (
-              <FRbutton color="root" onClick={() => dispatch(setModalAction(true))}>
-                Авторизация
-              </FRbutton>
-            )
-            : (
-              <>
-                <FRlink href={"/profile/" + user?.id}>
-                  <FRbutton color="root">
-                    Профиль
-                  </FRbutton>
-                </FRlink>
-              </>
-            )
-          }
         </Toolbar>
       </AppBar>
     </>

@@ -5,6 +5,7 @@ import { fr_stylesModal } from "../../core/styles/root/modal";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../core/store/actions/auth";
+import { setModalAction } from "../../core/store/actions/app";
 import { useHistory } from "react-router";
 import { AppStateType } from "../../core/store/store";
 import Alert from "@material-ui/lab/Alert";
@@ -21,7 +22,10 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (user != null) history.push("/profile/" + user.id)
+    if (user != null) {
+      dispatch(setModalAction(false))
+      history.push("/profile/" + user.id)
+    }
   }, [user])
 
   return (

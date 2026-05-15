@@ -63,7 +63,7 @@ const Profile = () => {
           <CardHeader title="Успешное выполнение заданий" />
           <CardContent>
             <Typography variant="h2">
-              { user?.tasks.length }
+              { user?.tasks?.length ?? 0 }
             </Typography>
           </CardContent>
           <CardActions>
