@@ -112,8 +112,13 @@ export const createCanvas = (canvas: any, level: number) => {
     }
 
     for (let i = 0; i < level; i++) {
-        const flag = (i + 1 == level) ? cachedImages.flagfull : cachedImages.flagwin
+        const flag = cachedImages.flagwin
         if (flag) ctx.drawImage(flag, arrPositions[i].x, arrPositions[i].y, 86, 86)
+    }
+
+    if (level > 0) {
+        user.x = arrPositions[level - 1].x
+        user.y = arrPositions[level - 1].y - user.height + 86
     }
 
     user.draw(ctx)
