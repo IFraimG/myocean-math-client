@@ -8,7 +8,7 @@ import fone from "../../assets/fonegame.jpg";
 import FRbutton from "../app/FRbutton";
 import { fr_stylesText } from "../../core/styles/root/text";
 import { fr_stylesInput } from "../../core/styles/root/input";
-import { createCanvas } from "./canvas";
+import { createCanvas, preloadAssets } from "./canvas";
 import {
   Modal,
   TextField,
@@ -58,7 +58,7 @@ const Level: React.FC<LevelPageTypes> = ({
   }
 
   useEffect(() => {
-    return setupAnimation()
+    preloadAssets().then(() => setupAnimation())
   }, []);
 
   useEffect(() => {

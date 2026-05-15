@@ -1,4 +1,4 @@
-import playerImage from "../../assets/player.jpg"
+import playerImage from "../../assets/player3.png"
 import flagwinImage from "../../assets/flagwin.png"
 import flagfullImage from "../../assets/flagfull.png"
 
@@ -108,14 +108,15 @@ export const createCanvas = (canvas: any, level: number) => {
 
     let user = new User(canvasWidth, canvasHeight)
     for (let i = 0; i < level; i++) {
-        let flag = new Image()
-        if (i + 1 == level) flag.src = flagfullImage
-        else flag.src = flagwinImage
-        ctx.drawImage(flag, arrPositions[i].x, arrPositions[i].y, 86, 86)
-        user.clear(ctx)
         user.moveController(i)
-        user.draw(ctx)
     }
+
+    for (let i = 0; i < level; i++) {
+        const flag = (i + 1 == level) ? cachedImages.flagfull : cachedImages.flagwin
+        if (flag) ctx.drawImage(flag, arrPositions[i].x, arrPositions[i].y, 86, 86)
+    }
+
+    user.draw(ctx)
         
     let framesCount: number = 0
     framesCount++;
