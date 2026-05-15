@@ -29,4 +29,10 @@ export class TasksController {
   deleteTasks(@Param('task') taskID: string) {
     return this.tasks.deleteTasks(taskID)
   }
+
+  @Post('/bulk-create')
+  async createTasks(@Body() tasks: any[]): Promise<string> {
+    await this.tasks.createTasksFromJson(tasks)
+    return 'Tasks created successfully'
+  }
 }

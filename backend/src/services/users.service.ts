@@ -47,7 +47,6 @@ export class UsersService {
 
   async getUserByEmail(email: string) {
     const res = await this.User.findOne({ email: email }).exec()
-    console.log(res)
 
     return res
   }

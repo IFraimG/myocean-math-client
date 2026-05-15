@@ -43,7 +43,7 @@ const ModalAuth: React.FC<ModalAuthInterface> = ({ isModal, setOpen, errorLogin 
                 <Typography className={modalStyles.text} variant="h4">Авторизация</Typography>
                 <Tabs 
                   indicatorColor="primary" 
-                  textColor="primary" 
+                  textColor="primary"
                   value={tabAuth} 
                   onChange={changeTabs}
                 >

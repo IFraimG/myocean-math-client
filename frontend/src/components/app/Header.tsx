@@ -12,7 +12,7 @@ import { setModalAction } from '../../core/store/actions/app';
 
 const Header = () => {
   const isModal = useSelector((state: AppStateType) => state.AppReducer.isModal)
-  const { isAuth, tokenUser, errorLogin } = useSelector((state: AppStateType) => state.AuthReducer)
+  const { isAuth, user, errorLogin } = useSelector((state: AppStateType) => state.AuthReducer)
   const dispatch = useDispatch()
   
   return (
@@ -21,7 +21,7 @@ const Header = () => {
       <AppBar position="sticky" style={{background: colorTheme.lightGreen}}>
         <Toolbar style={{display: "flex", justifyContent: "space-around", gap: "20px"}}>
           <FRlink href="/">
-            <Typography variant="h4" style={{fontFamily: "Segoe Print"}}>
+            <Typography variant="h4">
               Myocean Math
             </Typography>
           </FRlink>
@@ -32,10 +32,7 @@ const Header = () => {
             )
             : (
               <>
-                <FRlink href="/level">
-                  <FRbutton>Приступить к прохождению</FRbutton>
-                </FRlink>
-                <FRlink href={"/profile/" + tokenUser.id}>
+                <FRlink href={"/profile/" + user?.id}>
                   <FRbutton color="root">
                     Профиль
                   </FRbutton>

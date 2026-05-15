@@ -8,15 +8,19 @@ import {
   Res,
 } from '@nestjs/common'
 import * as fs from 'fs'
+import path from 'path'
 
 @Controller('/files')
 export class FilesController {
   constructor(private fileService: FileService) {}
 
-  @Get('/:filename')
+  @Get('/tasks/:filename')
   async getImage(@Param('filename') filename: string, @Res() res: any) {
-    if (fs.existsSync('tasks/' + filename))
-      res.sendFile(filename, { root: 'tasks' })
-    else throw new HttpException('Изображение не найдено', HttpStatus.NOT_FOUND)
+    const filePath = path.join(process.cwd(), 'tasks', filename)
+    if (fs.existsSync(filePath)) {
+      res.sendFile(filePath)
+    } else {
+      throw new HttpException('Изображение не найдено', HttpStatus.NOT_FOUND)
+    }
   }
 }

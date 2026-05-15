@@ -22,10 +22,10 @@ const LevelForm: React.FC<LevelFormTypes> = ({ answers, truthy, sendAnswer }) =>
 
   return (
     <FormControl component="fieldset">
-    <FormLabel component="legend">Выберите верный вариант ответа:</FormLabel>
+    <FormLabel component="legend" style={{ color: "rgb(64, 115, 83)" }}>Выберите верный вариант ответа:</FormLabel>
     <RadioGroup onChange={(event: any) => sendAnswer(event.target.value)}>
       {formData.map((item: string, index: number) => {
-        return <FormControlLabel value={item} key={item} control={<Radio color="primary" />} label={item} />
+        return <FormControlLabel value={item} key={item} control={<Radio style={{ color: "rgb(64, 115, 83)" }} />} label={item} />
       })}
     </RadioGroup>
   </FormControl>

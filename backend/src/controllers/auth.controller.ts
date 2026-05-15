@@ -1,6 +1,7 @@
 import { AuthSerivce } from './../services/auth.service'
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
+import { UnauthorizedException } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -20,6 +21,9 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get('/check')
   async checkAuth(@Request() req: any) {
+    if (!req.user) {
+      throw new UnauthorizedException('Unauthorized access');
+    }
     return req.user
   }
 }

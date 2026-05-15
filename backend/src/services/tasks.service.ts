@@ -1,4 +1,4 @@
-import { TaskDocument } from './../schemas/tasks.schema'
+import { Task, TaskDocument } from './../schemas/tasks.schema'
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
@@ -78,5 +78,14 @@ export class TasksService {
   async deleteTasks(taskID: string) {
     const task = await this.Tasks.findOneAndDelete({ id: taskID }).exec()
     return task
+  }
+
+  async createTasksFromJson(tasks: Task[]): Promise<void> {
+    for (const task of tasks) {
+      const existingTask = await this.Tasks.findOne({ id: task.id })
+      if (!existingTask) {
+        await this.Tasks.create(task)
+      }
+    }
   }
 }

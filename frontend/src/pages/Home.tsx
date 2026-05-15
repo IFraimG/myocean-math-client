@@ -33,7 +33,7 @@ const HomePage = () => {
                 <img src={screen} alt=""/>
                 <div className={styles.home__right}>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur explicabo magnam numquam illum accusamus deleniti nesciunt? Reiciendis dolore porro sunt, autem odit aliquid maiores cum voluptas repellat aperiam error ratione quisquam facere consequatur nulla totam. Cumque, tenetur, quo delectus dolor aspernatur iste quas dicta dignissimos blanditiis suscipit commodi! Reprehenderit quisquam temporibus distinctio veniam! Illum itaque est maxime vero ullam. Perferendis repellendus ullam, quidem odio veniam incidunt sunt nesciunt? Adipisci, nam. Aliquam perspiciatis maxime enim modi omnis voluptatibus id, illo suscipit?</p>
-                  <Alert variant="filled" color="warning">Данный сайт находится в разработке !</Alert>
+                  {/* <Alert variant="filled" color="warning">Данный сайт находится в разработке !</Alert> */}
                   <button onClick={() => dispatch(setModalAction(true))} className={styles.home__auth}>Зарегистрироваться</button>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import FRbutton from "../app/FRbutton";
 import { fr_stylesModal } from "../../core/styles/root/modal";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import { loginThunk } from "../../core/store/reducers/auth";
+import { loginUser } from "../../core/store/actions/auth";
 import { useHistory } from "react-router";
 import { AppStateType } from "../../core/store/store";
 import Alert from "@material-ui/lab/Alert";
@@ -17,7 +17,7 @@ const Login = () => {
   const { errorLogin, user } = useSelector((state: AppStateType) => state.AuthReducer)
 
   const sendData = async () => {
-    dispatch(loginThunk(regData))
+    dispatch(loginUser(regData.email, regData.password));
   }
 
   useEffect(() => {

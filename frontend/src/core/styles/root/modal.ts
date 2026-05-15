@@ -33,6 +33,5 @@ export const fr_stylesModal = makeStyles({
     justifyContent: "flex-end"
   },
   text: {
-    fontFamily: "Segoe Print"
   }
 })

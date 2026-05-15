@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { CircularProgress, Link } from "@material-ui/core"
+import { CardHeader, CircularProgress, Link } from "@material-ui/core"
 import Alert from '@material-ui/lab/Alert';
 import FRbutton from "../app/FRbutton"
 import FRlink from "../app/FRlink"
@@ -33,8 +33,20 @@ const Profile = () => {
   
   if (!isLoader && !isNotUser) return (
     <>
-    <div style={{display: "flex", alignItems: "center", justifyContent: "space-around", flexWrap: "wrap"}}>
-        <Card style={{width: "400px", margin: "50px", textAlign: "center"}}>
+      <div style={{
+        display: "flex", 
+        flexWrap: "wrap", 
+        marginTop: "50px", 
+        justifyContent: "center", 
+        alignItems: "flex-start",
+        gap: "50px"
+      }}>
+        <Card style={{
+          width: "400px", 
+          textAlign: "center",
+          padding: "10px"
+        }}>
+          <CardHeader title="Профиль" />
           <CardContent>
             <Typography variant="h3">
               { user?.login }
@@ -47,17 +59,22 @@ const Profile = () => {
             <FRbutton onClick={logoutUser}>Выйти</FRbutton>
           </CardActions>
         </Card>
-        <div>
-          <Typography style={{ marginBottom: "20px" }} variant="h3">
-            Выполнено заданий: { user?.tasks.length }
-          </Typography>
-          <FRlink href="/level">
-            <FRbutton>Приступить к прохождению</FRbutton>
-          </FRlink>
-        </div>
+        <Card style={{ padding: "10px" }}>
+          <CardHeader title="Успешное выполнение заданий" />
+          <CardContent>
+            <Typography variant="h2">
+              { user?.tasks.length }
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <FRlink href="/level">
+              <FRbutton>Приступить к прохождению</FRbutton>
+            </FRlink>
+          </CardActions>
+        </Card>
       </div>
       { !isLoaderTasks ? 
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", margin: "20px auto", maxWidth: "1170px"}}>
           { tasksList != null && tasksList?.length > 0 ?
             tasksList.map((item, index) => {
               return <FinishedTask key={index} item={item} />

@@ -1,3 +1,7 @@
+import playerImage from "../../assets/player.jpg"
+import flagwinImage from "../../assets/flagwin.png"
+import flagfullImage from "../../assets/flagfull.png"
+
 class User {
     img: string
     user: any
@@ -9,7 +13,7 @@ class User {
     constructor(public canvasWidth: number, public canvasHeight: number) {
         this.x = canvasWidth - 200
         this.y = canvasHeight - 200
-        this.img = "../../assets/player.png"
+        this.img = playerImage
         this.width = 86
         this.height = 156
         this.user = new Image()
@@ -58,6 +62,29 @@ class User {
     }
 }
 
+const preloadImage = (src: string): Promise<HTMLImageElement> => {
+    return new Promise((resolve) => {
+        const img = new Image()
+        img.onload = () => resolve(img)
+        img.src = src
+    })
+}
+
+let cachedImages: {
+    flagwin?: HTMLImageElement
+    flagfull?: HTMLImageElement
+    player?: HTMLImageElement
+} = {}
+
+export const preloadAssets = async () => {
+    const [flagwin, flagfull, player] = await Promise.all([
+        preloadImage(flagwinImage),
+        preloadImage(flagfullImage),
+        preloadImage(playerImage),
+    ])
+    cachedImages = { flagwin, flagfull, player }
+}
+
 export const createCanvas = (canvas: any, level: number) => {
     let ctx = canvas.current.getContext("2d")
     ctx.mozImageSmoothingEnabled = false;
@@ -82,8 +109,8 @@ export const createCanvas = (canvas: any, level: number) => {
     let user = new User(canvasWidth, canvasHeight)
     for (let i = 0; i < level; i++) {
         let flag = new Image()
-        if (i + 1 == level) flag.src = "/src/assets/flagfull.png"
-        else flag.src = "assets/flagwin.png"
+        if (i + 1 == level) flag.src = flagfullImage
+        else flag.src = flagwinImage
         ctx.drawImage(flag, arrPositions[i].x, arrPositions[i].y, 86, 86)
         user.clear(ctx)
         user.moveController(i)
